@@ -20,7 +20,7 @@ log Starting $(basename $0)
 while true; do
 
   status1=$(mpc | grep "\[playing\]")
-  sleep 1
+  sleep 2
 
   [ -z "$status1" ] && continue
 

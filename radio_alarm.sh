@@ -2,7 +2,7 @@
 
 cd $(dirname $0)
 
-set -e
+#set -e
 
 log() {
 
@@ -12,9 +12,9 @@ log() {
 
 volume() {
 
-  for vol in {65..85}; do
+  for vol in {40..70}; do
     mpc volume $vol
-    sleep 15
+    sleep 30
   done
 
 }
@@ -34,7 +34,7 @@ STOP=$(cat .alarm_stop) || STOP=1000
 log Radio will play between $START and $STOP
 
 # Reset Alarm
-echo true > ~/dev/alarm_clock/.alarm_switch
+echo true > .alarm_switch
 
 while true; do
 
@@ -46,7 +46,7 @@ while true; do
     mpc add http://178.79.224.13/stream/bbcmedia_6music_mf_p && \
     mpc play && volume
 
-  [ $(date +%H%M%S) -eq 0800 ] && mpc volume 90 && sleep 60
+  [ $(date +%H%M) -eq 0900 ] && mpc volume 80 && sleep 60
 
   [ $(date +%H%M) -eq $STOP ] && log auto stop && mpc stop && sleep 60
   ! $(cat .alarm_switch) && log force stop && mpc stop
